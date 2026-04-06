@@ -21,9 +21,10 @@ public class SaveFile
         m_SavePath = Path.Combine(Application.persistentDataPath, m_Filename + m_Extension);
     }
 
-    public void Save() 
+    public void Save(SaveData data) 
     {
-        
+        string json = JsonUtility.ToJson(data);
+        WriteSave(json);
     }
 
     public SaveData Load() 
@@ -34,7 +35,19 @@ public class SaveFile
         return emptyData;
     }
 
-    private string ReadSave() { return ""; }
-    private void WriteSave(string json) { }
+    public void Delete()
+    {
+
+    }
+
+    private string ReadSave() 
+    { 
+        return ""; 
+    }
+    
+    private void WriteSave(string json) 
+    {
+        Debugger.Log(json);
+    }
     
 }

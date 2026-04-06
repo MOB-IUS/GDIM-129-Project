@@ -520,6 +520,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b9f0c0bcc3543d4d9e4703f3d0b7a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveController
+  m_SaveBuilder:
+    m_Player: {fileID: 11400000, guid: 29309fbc6d4b8474e858989f40b316db, type: 2}
+    m_Game: {fileID: 11400000, guid: da56c68ec97899642bd8f78564f250ea, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

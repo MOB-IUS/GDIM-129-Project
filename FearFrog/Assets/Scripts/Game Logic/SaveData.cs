@@ -9,12 +9,15 @@ public class SaveBuilder
     [SerializeField] private GameData m_Game;
     public GameData Game { get { return m_Game; } }
 
-    /*
-    public static SaveData BuildSave()
+    public SaveData BuildSave()
     {
-        return new SaveData(m_Player.DataClass);
+        return new SaveData(m_Player.DataClass, m_Game.DataClass);
     }
-    */
+
+    public void LoadInto(SaveData data)
+    {
+
+    }
 
     public static SaveData BuildEmptySave()
     {
@@ -22,18 +25,21 @@ public class SaveBuilder
     }
 }
 
-
+[System.Serializable]
 public class SaveData
 {
-    private PlayerDataClass m_Player;
+    [SerializeField] private PlayerDataClass m_Player;
     public PlayerDataClass Player { get { return m_Player; } }
+    [SerializeField] private GameDataClass m_Game;
+    public GameDataClass Game { get { return m_Game; } }
 
-    private DateTime m_LastSaved;
-    public DateTime LastSaved { get { return m_LastSaved; } }
+    [SerializeField] private string m_LastSaved;
+    public string LastSaved { get { return m_LastSaved; } }
 
-    public SaveData(PlayerDataClass player)
+    public SaveData(PlayerDataClass player, GameDataClass game)
     {
         m_Player = player;
+        m_Game = game;
         
         LogSave();
     }
@@ -42,6 +48,6 @@ public class SaveData
 
     public void LogSave()
     {
-        m_LastSaved = DateTime.UtcNow;
+        m_LastSaved = $"{DateTime.UtcNow}";
     }
 }
