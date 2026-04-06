@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 
 [System.Serializable]
-public class PlayerDataclass
+public class PlayerDataClass
 {
 
 }
@@ -11,6 +11,6 @@ public class PlayerDataclass
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Scriptable Objects/PlayerData")]
 public class PlayerData : ScriptableObject
 {
-    [SerializeField] private PlayerDataclass m_DataClass;
-    public PlayerDataclass DataClass { get { return m_DataClass; } }
+    [SerializeField] private PlayerDataClass m_DataClass;
+    public PlayerDataClass DataClass { get { return m_DataClass; } }
 }

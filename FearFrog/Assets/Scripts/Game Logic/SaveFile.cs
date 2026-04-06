@@ -11,9 +11,6 @@ public class SaveFile
     private string m_SavePath;
     public string SavePath { get { return m_SavePath; } }
 
-    private DateTime m_LastUpdated;
-    public DateTime LastUpdated { get { return m_LastUpdated; } }
-
     public SaveFile(string filename, bool encrypt = false)
     {
         m_Filename = filename;
@@ -23,5 +20,21 @@ public class SaveFile
 
         m_SavePath = Path.Combine(Application.persistentDataPath, m_Filename + m_Extension);
     }
+
+    public void Save() 
+    {
+        
+    }
+
+    public SaveData Load() 
+    {
+        SaveData emptyData = SaveBuilder.BuildEmptySave();
+        string json = ReadSave();
+        JsonUtility.FromJsonOverwrite(json, emptyData);
+        return emptyData;
+    }
+
+    private string ReadSave() { return ""; }
+    private void WriteSave(string json) { }
     
 }
