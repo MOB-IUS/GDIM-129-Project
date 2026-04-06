@@ -2,10 +2,7 @@ using UnityEngine;
 using System;
 
 [System.Serializable]
-public class PlayerDataClass
-{
-
-}
+public class PlayerDataClass : CharacterDataClass { }
 
 
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Scriptable Objects/PlayerData")]
