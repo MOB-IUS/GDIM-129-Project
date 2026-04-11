@@ -1,31 +1,46 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     // Member Variables
-    [SerializeField] private float m_moveSpeed = 5f;
-    [SerializeField] private float m_cameraSensitivity = 100f;
-    private Rigidbody m_playerRb;
-    
     private uint m_health = 0; // To be set later with scriptable objects
+    [SerializeField] private float m_moveSpeed = 2f;
+    [SerializeField] private float m_cameraSensitivity = 100f;
+    
+    private float m_xOritation = 0; // Record of player look direction
+    private float m_yOritation = 0;
+    
+    [SerializeField] private GameObject m_playerEntity;
+    [SerializeField] private GameObject m_camera;
+    
     
     // Awake
     void Awake()
     {
-        // Set private member variables
-        m_playerRb = this.GetComponent<Rigidbody>();
+        // Lock cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
-    
 
     // Update
     void Update()
     {
+        // Player Look
+        Vector2 lookDirection = InputController.Instance.Input.Player.Look.ReadValue<Vector2>();
+        m_xOritation += lookDirection.x * m_cameraSensitivity * Time.deltaTime;
+        m_yOritation += lookDirection.y * m_cameraSensitivity * Time.deltaTime;
+        m_yOritation = Math.Clamp(m_yOritation, -90f, 90f);
+        
+        m_camera.transform.rotation = Quaternion.Euler(-m_yOritation, m_xOritation, 0f);
+        m_playerEntity.transform.rotation = Quaternion.Euler(0f, m_xOritation, 0f);
+        
         // Player Move
         Vector2 input = InputController.Instance.Input.Player.Move.ReadValue<Vector2>();
-        Debug.Log(input.ToString());
         Vector3 moveDirection = new Vector3(input.x, 0, input.y);
+        moveDirection = (Quaternion.Euler(0f, m_xOritation, 0f) * moveDirection).normalized;
 
-        m_playerRb.linearVelocity = moveDirection.normalized * m_moveSpeed;
+        this.GetComponent<Rigidbody>().AddForce(moveDirection * m_moveSpeed, ForceMode.Force);
     }
 }
