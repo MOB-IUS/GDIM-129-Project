@@ -339,3 +339,4 @@ FodyWeavers.xsd
 Frog2/Assets/Tilemap/Level Palette.prefab.meta
 *.json
 /Frog2/Assets/Saves
+*.idea/
